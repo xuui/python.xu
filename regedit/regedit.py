@@ -1,5 +1,7 @@
 ﻿#!/usr/bin/python2.7
 # encoding:utf-8
+import os
+import shutil
 
 # OEM Login
 # [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background]
@@ -7,9 +9,8 @@
 
 # C:\Windows\System32\oobe\info\backgrounds\backgroundDefault.jpg
 path='C:/Windows/System32/oobe/info/backgrounds'
-oemfile='C:/Windows/System32/oobe/info/backgrounds/backgroundDefault.jpg'
+logofile='C:/Windows/System32/oobe/info/backgrounds/backgroundDefault.jpg'
 
-import os
 #repo.is_dirty()
 
 def formatSize(bytes):
@@ -28,17 +29,22 @@ def formatSize(bytes):
         else:
             return "%fM" % (M)
     else:
-        return "%fkb" % (kb)
+        return "%fKb" % (kb)
 
 if os.path.exists(path):
     print "Path's Y"
-    if os.path.exists(oemfile):
+    if os.path.exists(logofile):
         print "logo's Y"
-        size = os.path.getsize(oemfile)
-        print formatSize(size)
+        size = os.path.getsize(logofile)
+        #shutil.copy('oemlogo.jpg',logofile)
+        print 'files: ' + formatSize(size)
     else:
         print "logo's N"
+        shutil.copy('oemlogo.jpg',logofile)
 else:
-  print "Path's a N"
+    print "Path's a N"
+    os.makedirs(path)
+    shutil.copy('oemlogo.jpg',logofile)
+
 
     
