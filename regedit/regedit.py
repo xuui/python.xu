@@ -2,6 +2,7 @@
 # encoding:utf-8
 import os
 import shutil
+import winreg
 
 # OEM Login
 # [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background]
@@ -32,19 +33,20 @@ def formatSize(bytes):
         return "%fKb" % (kb)
 
 if os.path.exists(path):
-    print "Path's Y"
+    #print "Path's Y"
     if os.path.exists(logofile):
-        print "logo's Y"
+        #print "logo's Y"
         size = os.path.getsize(logofile)
         #shutil.copy('oemlogo.jpg',logofile)
-        print 'files: ' + formatSize(size)
+        print 'oemlogo: ' + formatSize(size)
     else:
-        print "logo's N"
+        #print "logo's N"
         shutil.copy('oemlogo.jpg',logofile)
 else:
-    print "Path's a N"
+    #print "Path's a N"
     os.makedirs(path)
     shutil.copy('oemlogo.jpg',logofile)
 
-
-    
+regKey=winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,r"SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background", 0, winreg.KEY_WRITE)
+winreg.SetValueEx(regKey,"OEMBackground",0,winreg.REG_DWORD,1)
+winreg.CloseKey(regKey)
