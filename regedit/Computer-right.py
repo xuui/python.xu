@@ -1,11 +1,41 @@
-ï»¿#!/usr/bin/python2.7
-# encoding:utf-8
+#!/usr/bin/python2.7
+# encoding:gbk
 import shutil
 import winreg
 
-# Updata Registry.
-regKey=winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\DevMgr", 0, winreg.KEY_WRITE)
-#winreg.SetValueEx(regKey,"OEMBackground",0,winreg.REG_DWORD,1)
-winreg.SetValue(regKey,"@",0,winreg.REG_SZ,'è®¾å¤‡(&Q)')
-winreg.SetValue(regKey,"icon",0,winreg.REG_SZ,'CompMgmtLauncher.exe')
-winreg.CloseKey(regKey)
+# Computer Right menus Registry.
+# Éè±¸¹ÜÀíÆ÷
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\DevMgr") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "Éè±¸(&Q)")
+    winreg.SetValueEx(key, "Icon", 0, winreg.REG_SZ, "CompMgmtLauncher.exe")
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\DevMgr\command") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "mmc devmgmt.msc")
+
+# Ð¶ÔØ³ÌÐò
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Dezinstall") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "Ð¶ÔØ(&U)")
+    winreg.SetValueEx(key, "Icon", 0, winreg.REG_SZ, "OptionalFeatures.exe")
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Dezinstall\command") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "rundll32.exe shell32.dll,Control_RunDLL appwiz.cpl")
+
+#¿ØÖÆÃæ°å
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Control") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "¿ØÖÆ(&C)")
+    winreg.SetValueEx(key, "Icon", 0, winreg.REG_SZ, "Control.exe")
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Control\command") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "Control.exe")
+
+# ·þÎñ¹ÜÀí
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\services") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "·þÎñ(&V)")
+    winreg.SetValueEx(key, "Icon", 0, winreg.REG_SZ, "UI0Detect.exe")
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\services\command") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "mmc services.msc")
+
+# ×é²ßÂÔ¶ÔÏó±à¼­Æ÷
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\GroupPolicyEditor") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "×é²ßÂÔ(&Z)")
+    winreg.SetValueEx(key, "Icon", 0, winreg.REG_SZ, "mmc.exe")
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\xuui\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\GroupPolicyEditor\command") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "mmc gpedit.msc")
+
