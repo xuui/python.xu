@@ -4,7 +4,7 @@ import os
 import shutil
 import winreg
 
-# OEM Login
+# OEM Login Registry.
 # [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background]
 # "OEMBackground"=dword:00000001
 
@@ -38,7 +38,7 @@ if os.path.exists(path):
         #print "logo's Y"
         size = os.path.getsize(logofile)
         #shutil.copy('oemlogo.jpg',logofile)
-        print 'oemlogo: ' + formatSize(size)
+        print 'OEM logo: ' + formatSize(size)
     else:
         #print "logo's N"
         shutil.copy('oemlogo.jpg',logofile)
@@ -47,6 +47,8 @@ else:
     os.makedirs(path)
     shutil.copy('oemlogo.jpg',logofile)
 
+# Updata Registry.
 regKey=winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,r"SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background", 0, winreg.KEY_WRITE)
 winreg.SetValueEx(regKey,"OEMBackground",0,winreg.REG_DWORD,1)
 winreg.CloseKey(regKey)
+
