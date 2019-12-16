@@ -39,3 +39,9 @@ with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Classes\CLSID\{20D04
 with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\GroupPolicy\command") as key:
     winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "mmc gpedit.msc")
 
+# 注册表编辑器
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Registry") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, u"注册表(&R)")
+    winreg.SetValueEx(key, "Icon", 0, winreg.REG_SZ, "regedit.exe")
+with winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Classes\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\shell\Registry\command") as key:
+    winreg.SetValueEx(key, "", 0, winreg.REG_SZ, "regedit.exe")
