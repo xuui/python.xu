@@ -1,4 +1,4 @@
-Prompt $p$_$g$s
+Prompt $p$_#$s
 cls
 Dism /Get-WimInfo /WimFile:sources\install.wim
 pause
