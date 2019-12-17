@@ -1,65 +1,31 @@
 Prompt $p$_#$s
-cls
 Dism /Get-WimInfo /WimFile:sources\install.wim
-pause
 
-rem index:1
+rem /Export-Image index-1
 md dism_mount
 Dism /Mount-Wim /WimFile:sources\install.wim /index:1 /MountDir:dism_mount
 Dism /image:dism_mount /enable-feature /featurename:NetFX3 /All /Source:.\sources\sxs /LimitAccess
-Dism /Capture-Image /ImageFile:install_dism.wim /CaptureDir:dism_mount /Name:"Windows 10 家庭版" /Description:"Windows 10 家庭版 (x64)" /Compress:max /CheckIntegrity /Verify
+Dism /Unmount-Wim /MountDir:dism_mount /commit
+Dism /Export-Image /SourceImageFile:sources\install.wim /SourceIndex:1 /DestinationImageFile:install_dism-x64.wim /Compress:max /CheckIntegrity
+rd /s /q dism_mount
+Dism /Get-WimInfo /WimFile:install_dism-x64.wim
+
+rem /Capture-Image index-1
+md dism_mount
+Dism /Mount-Wim /WimFile:sources\install.wim /index:1 /MountDir:dism_mount
+Dism /image:dism_mount /enable-feature /featurename:NetFX3 /All /Source:.\sources\sxs /LimitAccess
+Dism /Capture-Image /ImageFile:install_dism-x64.wim /CaptureDir:dism_mount /Name:"Name" /Description:"Description" /Compress:max /CheckIntegrity /Verify
 Dism /Unmount-Wim /MountDir:dism_mount /discard
 rd /s /q dism_mount
-Dism /Get-WimInfo /WimFile:install_dism.wim
-pause
+Dism /Get-WimInfo /WimFile:install_dism-x64.wim
 
-rem index:2
+rem /Append-Image index-2
 md dism_mount
 Dism /Mount-Wim /WimFile:sources\install.wim /index:2 /MountDir:dism_mount
 Dism /image:dism_mount /enable-feature /featurename:NetFX3 /All /Source:.\sources\sxs /LimitAccess
-Dism /Append-Image /ImageFile:install_dism.wim /CaptureDir:dism_mount /Name:"Windows 10 家庭单语言版" /Description:"Windows 10 家庭单语言版 (x64)" /CheckIntegrity /Verify
+Dism /Append-Image /ImageFile:install_dism-x64.wim /CaptureDir:dism_mount /Name:"Name" /Description:"Description" /CheckIntegrity /Verify
 Dism /Unmount-Wim /MountDir:dism_mount /discard
 rd /s /q dism_mount
-Dism /Get-WimInfo /WimFile:install_dism.wim
-pause
+Dism /Get-WimInfo /WimFile:install_dism-x64.wim
 
-rem index:3
-md dism_mount
-Dism /Mount-Wim /WimFile:sources\install.wim /index:3 /MountDir:dism_mount
-Dism /image:dism_mount /enable-feature /featurename:NetFX3 /All /Source:.\sources\sxs /LimitAccess
-Dism /Append-Image /ImageFile:install_dism.wim /CaptureDir:dism_mount /Name:"Windows 10 教育版" /Description:"Windows 10 教育版 (x64)" /CheckIntegrity /Verify
-Dism /Unmount-Wim /MountDir:dism_mount /discard
-rd /s /q dism_mount
-Dism /Get-WimInfo /WimFile:install_dism.wim
-pause
 
-rem index:4
-md dism_mount
-Dism /Mount-Wim /WimFile:sources\install.wim /index:4 /MountDir:dism_mount
-Dism /image:dism_mount /enable-feature /featurename:NetFX3 /All /Source:.\sources\sxs /LimitAccess
-Dism /Append-Image /ImageFile:install_dism.wim /CaptureDir:dism_mount /Name:"Windows 10 专业版" /Description:"Windows 10 专业版 (x64)" /CheckIntegrity /Verify
-Dism /Unmount-Wim /MountDir:dism_mount /discard
-rd /s /q dism_mount
-Dism /Get-WimInfo /WimFile:install_dism.wim
-pause
-
-rem index:5
-md dism_mount
-Dism /Mount-Wim /WimFile:sources\install.wim /index:5 /MountDir:dism_mount
-Dism /image:dism_mount /enable-feature /featurename:NetFX3 /All /Source:.\sources\sxs /LimitAccess
-Dism /Append-Image /ImageFile:install_dism.wim /CaptureDir:dism_mount /Name:"Windows 10 专业教育版" /Description:"Windows 10 专业教育版 (x64)" /CheckIntegrity /Verify
-Dism /Unmount-Wim /MountDir:dism_mount /discard
-rd /s /q dism_mount
-Dism /Get-WimInfo /WimFile:install_dism.wim
-pause
-
-rem index:6
-md dism_mount
-Dism /Mount-Wim /WimFile:sources\install.wim /index:6 /MountDir:dism_mount
-Dism /image:dism_mount /enable-feature /featurename:NetFX3 /All /Source:.\sources\sxs /LimitAccess
-Dism /Append-Image /ImageFile:install_dism.wim /CaptureDir:dism_mount /Name:"Windows 10 专业工作站版" /Description:"Windows 10 专业工作站版 (x64)" /CheckIntegrity /Verify
-Dism /Unmount-Wim /MountDir:dism_mount /discard
-rd /s /q dism_mount
-
-cls
-Dism /Get-WimInfo /WimFile:install_dism.wim
