@@ -1,6 +1,11 @@
 # Ubuntu AD.
 
-echo /etc/hosts >> 127.0.0.1 aadds.contoso.com ubuntu
+# echo /etc/sysctl.conf >> "net.ipv4.ip_forward = 1"
+# sysctl -p /etc/sysctl.conf
+or
+# echo 1 > /proc/sys/net/ipv4/ip_forward
+
+echo /etc/hosts >> "127.0.0.1 aadds.contoso.com ubuntu"
 
 sudo apt-get update
 sudo apt-get install krb5-user samba sssd sssd-tools libnss-sss libpam-sss ntp ntpdate realmd adcli
