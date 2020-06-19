@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# encoding:utf-8
+# -*- coding: utf-8 -*-
 # pip install GitPython
 
 # print('hello','World!')

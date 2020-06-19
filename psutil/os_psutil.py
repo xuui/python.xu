@@ -1,5 +1,5 @@
-#!/usr/bin/python3.8
-# encoding:utf-8
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 # pip install psutil
 
 import psutil
