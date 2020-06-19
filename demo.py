@@ -20,11 +20,13 @@ world''')
 print('Hi, %s, you have $%d.' % ('Michael', 1000000))
 
 #print os.getlogin()
-print getpass.getuser()
+#print getpass.getuser()
 #print getpass.getpass()
-
-content = os.popen('net user '+ getpass.getuser() +' /domain').read()
-print content
+#content = os.popen('net user '+ getpass.getuser() +' /domain').read()
+#print content
 
 
 print('37 ∷ ∴ ∵ × ÷ ° ℃ ‰')
+print('37°')
+print('31℃')
+print('32‰')
